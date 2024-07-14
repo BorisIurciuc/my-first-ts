@@ -5,6 +5,7 @@ import WeatherApi from './components/weatherApi/WeatherApi';
 import Layout from './components/layout/Layout';
 import Home from './components/home/Home';
 import { WeatherProvider } from './components/weatherContext/WeatherContext'
+import WeatherCities from './components/weatherCities/WeatherCities';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,6 +17,7 @@ root.render(
       <Route path='/' element={<Layout />}>
         <Route path='/' element={<Home />} />
         <Route path='/weatherApi' element={<WeatherApi />} />
+        <Route path='/weatherCities' element={<WeatherCities />} />
         <Route path="*" element={<h1>Error 404</h1>} />
       </Route>
     </Routes>

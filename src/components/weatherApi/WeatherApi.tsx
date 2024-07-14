@@ -17,8 +17,7 @@ const schema = Yup.object().shape({
 
 export default function WeatherApi() {
 
-  const { setCityWeather } = useContext(WeatherContext)
-  const { cityWeather } = useContext(WeatherContext)
+  const { cityWeather, saveCityWeather, setCityWeather } = useContext(WeatherContext)
 
   // const [cityWeather, setCityWeather] = useState<IWeatherData | null>(null);
 
@@ -49,33 +48,19 @@ export default function WeatherApi() {
         } else {
           alert("error res fetch weather date");
           setCityWeather({
-            weather: [{
-                id: 0,
-                main: '',
-                icon: ''
-              }],
-            main: {
-              temp: 0,
-            },
+            weather: [{ id: 0, main: '', icon: '' }],
+            main: { temp: 0 },
             name: ''
-          });
+                });
           // setCityWeather(null);
         }
       } catch (error) {
         console.error("error fetch weather date", error);
         setCityWeather({
-          weather: [
-            {
-              id: 0,
-              main: '',
-              icon: ''
-            }
-          ],
-          main: {
-            temp: 0,
-          },
+          weather: [{ id: 0, main: '', icon: '' }],
+          main: { temp: 0 },
           name: ''
-        });
+            });
         // setCityWeather(null);
       }
       setOutputisible(true);
@@ -86,16 +71,8 @@ export default function WeatherApi() {
 
   const deleteOutputWeather = () => {
     setCityWeather({
-      weather: [
-        {
-          id: 0,
-          main: '',
-          icon: ''
-        }
-      ],
-      main: {
-        temp: 0,
-      },
+      weather: [{ id: 0, main: '', icon: '' }],
+      main: { temp: 0 },
       name: ''
     });
     // setCityWeather(null)
@@ -140,7 +117,12 @@ export default function WeatherApi() {
             </div>
           ))}
           <div className={styles.containerSaveDelete}>
-            <button className={styles.btnSaveDelete}>Save</button>
+            <button 
+              type="submit"
+              onClick={saveCityWeather}
+              className={styles.btnSaveDelete}
+            >Save
+            </button>
             <button 
                 type='button' 
                 onClick={deleteOutputWeather}

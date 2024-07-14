@@ -12,10 +12,11 @@ interface IWeatherData {
     name: string;
 }
 
-
 interface IWeatherContext {
-    cityWeather: IWeatherData,
+    cityWeather: IWeatherData;
+    savedCities: IWeatherData[];
     setCityWeather: React.Dispatch<React.SetStateAction<IWeatherData>>
+    saveCityWeather: () => void;
 }
 
 interface IWeatherProviderProps {
@@ -23,45 +24,34 @@ interface IWeatherProviderProps {
 }
 
 const initialContext: IWeatherContext = {
-    cityWeather: 
-    
-    {
-        weather: [
-            {
-                id: 0,
-                main: '',
-                icon: ''
-            }
-        ],
-        main: {
-            temp: 0,
-        },
+    cityWeather: {
+        weather: [{ id: 0, main: '', icon: '' }],
+        main: { temp: 0 },
         name: ''
     },
-    setCityWeather: () => {}
+    savedCities: [],
+    setCityWeather: () => {},
+    saveCityWeather: () => {},
 }
 
 export const WeatherContext = createContext<IWeatherContext>(initialContext)
 
-
 export function WeatherProvider({children}: IWeatherProviderProps) {
 
 const [cityWeather, setCityWeather] = useState<IWeatherData>({
-    weather: [
-    {
-        id: 0,
-        main: '',
-        icon: '',
-    },
-    ],
-    main: {
-        temp: 0,
-    },
+    weather: [{ id: 0, main: '', icon: '' }],
+    main: { temp: 0 },
     name: '',
 });
 
+const [savedCities, setSavedCities] = useState<IWeatherData[]>([]);
+
+const saveCityWeather = () => {
+  setSavedCities((prev) => [...prev, cityWeather]);
+};
+
     return (
-        <WeatherContext.Provider value={{cityWeather, setCityWeather}}>
+        <WeatherContext.Provider value={{cityWeather, savedCities, setCityWeather, saveCityWeather }}>
             {children}
         </WeatherContext.Provider>
     )

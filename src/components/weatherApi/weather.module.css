@@ -45,6 +45,7 @@
     font-size: 20px;
     color: #fdfcfc;
     border: none;
+    cursor: pointer;
   }
   
   .outputInfo {
@@ -71,7 +72,7 @@
     margin: 2px;
     position: relative;
     top: 90px; 
-    left: -140px;
+    left: -120px;
     color: white;
     font-size: large;
 
@@ -101,6 +102,8 @@
     background-color: #3460db89;
     color: #fff;
     font-size: 17px;
+    cursor: pointer;
+
 
   }
   

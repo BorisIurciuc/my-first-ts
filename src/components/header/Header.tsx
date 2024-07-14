@@ -6,6 +6,7 @@ export default function Header() {
     <div className={styles.header}>
         <Link to={'/'} className={styles.link}>home</Link>
         <Link to={'/weatherApi'} className={styles.link}>weatherApi</Link>
+        <Link to={'/weatherCities'} className={styles.link}>weatherCities</Link>
     </div>
   )
 }
