@@ -8,18 +8,19 @@ interface IInputCity {
   nameCity: string;
 }
 
+const schema = Yup.object().shape({
+  nameCity: Yup.string()
+    .required("this field is required")
+    .min(2, "min 2 symbpls")
+    .max(20, "minimum 20 sympols"),
+});
+
 export default function WeatherApi() {
   const [cityWeather, setCityWeather] = useState<IWeatherData | null>(null);
   const [isOutputVisible, setOutputisible] = useState<boolean>(false);
   const [isLoading, setIsLoaading] = useState<boolean>(false);
   const [iconImg, setIconImg] = useState<string>("");
 
-  const schema = Yup.object().shape({
-    nameCity: Yup.string()
-      .required("this field is required")
-      .min(2, "min 2 symbpls")
-      .max(20, "minimum 20 sympols"),
-  });
   const formik = useFormik({
     initialValues: {
       nameCity: "",
