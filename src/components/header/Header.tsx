@@ -5,8 +5,7 @@ export default function Header() {
   return (
     <div className={styles.header}>
         <Link to={'/'} className={styles.link}>home</Link>
-        <Link to={'/weaterApi'} className={styles.link}>weatherApi</Link>
-        <Link to={'/test'} className={styles.link}>test</Link>
+        <Link to={'/weatherApi'} className={styles.link}>weatherApi</Link>
     </div>
   )
 }

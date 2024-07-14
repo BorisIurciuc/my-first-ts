@@ -1,17 +1,11 @@
-import { Link, Outlet } from 'react-router-dom'
-import styles from './layout.module.css'
+import { Outlet } from 'react-router-dom'
+import Header from '../header/Header'
 
 export default function Layout() {
     return (
         <>
-            <header className={styles.header}>
-                <Link to={'/'} className={styles.link}>home</Link>
-                <Link to={'/weatherApi'} className={styles.link}>weatherApi</Link>
-                <Link to={'/test'} className={styles.link}>test</Link>
-            </header>
-            <main>
+                <Header />
                 <Outlet />
-            </main>
         </>
     )
 }

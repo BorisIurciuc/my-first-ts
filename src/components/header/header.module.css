@@ -8,12 +8,12 @@
     display: flex;
     justify-content: right;
     align-items: center;
-
 }
 
 .link {
+    margin: 0 1rem;
     text-decoration: none;
-    color: #e7ecf0;
+    color: #ecf1f6;
   }
   
   .link:hover {

@@ -1,6 +1,6 @@
 .container {
     width: 100%;
-    height: 100vh;
+    height: 89vh;
     border: 1px solid black;
     background-image: url('https://s3-alpha-sig.figma.com/img/8b93/6aad/1a8a9bb19893d9b0ef5acb10326ff9b1?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GvPqxQ~mhBNnABSlSKvJNXsewnSoKc03DG1iHVeBXShdbXskORjNfw5mODuxUvDEe5Jj~ThyKKzkkAa~B90P9bJYOqAB4qqcWrfIdryV~X5IsFY87jrkzFuWgnR2mzzYbWXd8~gL1IC8IsTiShDsHAwdR6unIl8Uc4ImPHffGspgXueP4n27Ty0xP5VksJ9x33F1Hs8qNP~RdEn8rUYlmxgZY119y7fCbX3tLSpLMAtDfugKip5vxvq9zAVBJJBa10O0YcX~nf7T~PGhBSGh8z2GcwrbKjYS7FWzbGhSS-css~9utAQnBF76eyYwjYqMiJiSEXsvWCPiWixZXY7adg__');
     display: flex;

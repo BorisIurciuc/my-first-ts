@@ -26,7 +26,7 @@ export default function WeatherApi() {
     } as IInputCity,
     validationSchema: schema,
     validateOnChange: false,
-    onSubmit: async (values: IInputCity) => {
+    onSubmit: async (values: IInputCity, {resetForm}) => {
       setIsLoaading(true);
       try {
         const key = "beefc2057d8d39b3414b9a094f53cbcc";
@@ -50,7 +50,7 @@ export default function WeatherApi() {
       }
       setOutputisible(true);
       setIsLoaading(false);
-      console.log(iconImg);
+      resetForm()
     },
   });
 
