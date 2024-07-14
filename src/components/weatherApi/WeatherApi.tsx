@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./weather.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { IWeatherData } from "./types/weaterData";
+import { WeatherContext } from "../weatherContext/WeatherContext";
 
 interface IInputCity {
   nameCity: string;
@@ -16,7 +16,12 @@ const schema = Yup.object().shape({
 });
 
 export default function WeatherApi() {
-  const [cityWeather, setCityWeather] = useState<IWeatherData | null>(null);
+
+  const { setCityWeather } = useContext(WeatherContext)
+  const { cityWeather } = useContext(WeatherContext)
+
+  // const [cityWeather, setCityWeather] = useState<IWeatherData | null>(null);
+
   const [isOutputVisible, setOutputisible] = useState<boolean>(false);
   const [isLoading, setIsLoaading] = useState<boolean>(false);
   const [iconImg, setIconImg] = useState<string>("");
@@ -43,11 +48,35 @@ export default function WeatherApi() {
           console.log("iconName", iconName);
         } else {
           alert("error res fetch weather date");
-          setCityWeather(null);
+          setCityWeather({
+            weather: [{
+                id: 0,
+                main: '',
+                icon: ''
+              }],
+            main: {
+              temp: 0,
+            },
+            name: ''
+          });
+          // setCityWeather(null);
         }
       } catch (error) {
         console.error("error fetch weather date", error);
-        setCityWeather(null);
+        setCityWeather({
+          weather: [
+            {
+              id: 0,
+              main: '',
+              icon: ''
+            }
+          ],
+          main: {
+            temp: 0,
+          },
+          name: ''
+        });
+        // setCityWeather(null);
       }
       setOutputisible(true);
       setIsLoaading(false);
@@ -56,7 +85,20 @@ export default function WeatherApi() {
   });
 
   const deleteOutputWeather = () => {
-    setCityWeather(null)
+    setCityWeather({
+      weather: [
+        {
+          id: 0,
+          main: '',
+          icon: ''
+        }
+      ],
+      main: {
+        temp: 0,
+      },
+      name: ''
+    });
+    // setCityWeather(null)
     setOutputisible(false);
   }
   
