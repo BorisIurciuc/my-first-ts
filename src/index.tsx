@@ -6,11 +6,14 @@ import Layout from './components/layout/Layout';
 import Home from './components/home/Home';
 import { WeatherProvider } from './components/weatherContext/WeatherContext'
 import WeatherCities from './components/weatherCities/WeatherCities';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
+  <Provider store={store}>
   <WeatherProvider >
   <HashRouter>
     <Routes>
@@ -23,4 +26,6 @@ root.render(
     </Routes>
   </HashRouter>
   </WeatherProvider>
+    </Provider>
+
 );

@@ -1,31 +1,68 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { thunkWeather } from './weatherAction';
+import { IWeatherData } from '../../components/weatherApi/types/weaterData';
 
-const initialState: TypeForState = {
-  values: [],
-  isLoading: false,
-  error: null,
-};
+interface IWeatherSlice {
+  dataWeather: IWeatherData
+  isLoading: boolean
+  error: string
+}
+
+const initialWeather: IWeatherData = {
+    weather: [
+      {
+        id: 0,
+        main: "",
+        icon: "",
+      },
+    ],
+    main: {
+      temp: 0,
+    },
+    name: "",}
+
+
+const initialState: IWeatherSlice = {
+  dataWeather: initialWeather,
+    isLoading: false,
+    error: "",
+  };
 
 export const weatherSlice = createSlice({
-  name: 'sliceName',
+  name: 'sliceWeather',
   initialState,
-  reducers: {},
+  reducers: {
+    resetWeather: (state) => {
+      state.dataWeather = initialWeather
+    }
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(thunkName.pending, (state) => {
+      .addCase(thunkWeather.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(thunkName.fulfilled, (state, action) => {
+      .addCase(thunkWeather.fulfilled, (state, action) => {
         state.isLoading = false
-        state.products = action.payload;
+        state.dataWeather = action.payload;
       })
-      .addCase(thunkName.rejected, (state, action) => {
+      .addCase(thunkWeather.rejected, (state, action) => {
         state.isLoading = false
-        state.values = []
+        state.dataWeather = {
+          weather: [
+            {
+              id: 0,
+              main: "",
+              icon: "",
+            },
+          ],
+          main: {
+            temp: 0,
+          },
+          name: "",
+        }
         state.error = action.payload as string
-      })
-  },
+      })  },
 });
 
 export default weatherSlice;
-export const { } = weatherSlice.actions
+export const { resetWeather } = weatherSlice.actions

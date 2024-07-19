@@ -1,12 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./weather.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { WeatherContext } from "../weatherContext/WeatherContext";
+// import { WeatherContext } from "../weatherContext/WeatherContext";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { thunkWeather } from "../../features/weather/weatherAction";
+import { resetWeather } from "../../features/weather/weatherSlice";
 
 interface IInputCity {
   nameCity: string;
 }
+
 
 const schema = Yup.object().shape({
   nameCity: Yup.string()
@@ -16,13 +20,9 @@ const schema = Yup.object().shape({
 });
 
 export default function WeatherApi() {
-
-  const { cityWeather, saveCityWeather, setCityWeather } = useContext(WeatherContext)
-
-  // const [cityWeather, setCityWeather] = useState<IWeatherData | null>(null);
-
+  const {dataWeather, isLoading} = useAppSelector(store => store.sliceWeather)
+  const dispatch = useAppDispatch();
   const [isOutputVisible, setOutputisible] = useState<boolean>(false);
-  const [isLoading, setIsLoaading] = useState<boolean>(false);
   const [iconImg, setIconImg] = useState<string>("");
 
   const formik = useFormik({
@@ -32,57 +32,22 @@ export default function WeatherApi() {
     validationSchema: schema,
     validateOnChange: false,
     onSubmit: async (values: IInputCity, {resetForm}) => {
-      setIsLoaading(true);
-      try {
-        const key = "beefc2057d8d39b3414b9a094f53cbcc";
-
-        const res = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${values.nameCity}&appid=${key}&units=metric`
-        );
-        if (res.ok) {
-          const data = await res.json();
-          setCityWeather(data);
-          const iconName = data.weather[0].icon;
+          const iconName = dataWeather.weather[0].icon;
           setIconImg(`https://openweathermap.org/img/wn/${iconName}.png`);
           console.log("iconName", iconName);
-        } else {
-          alert("error res fetch weather date");
-          setCityWeather({
-            weather: [{ id: 0, main: '', icon: '' }],
-            main: { temp: 0 },
-            name: ''
-                });
-          // setCityWeather(null);
-        }
-      } catch (error) {
-        console.error("error fetch weather date", error);
-        setCityWeather({
-          weather: [{ id: 0, main: '', icon: '' }],
-          main: { temp: 0 },
-          name: ''
-            });
-        // setCityWeather(null);
-      }
+          console.log("iconImg", iconImg);
       setOutputisible(true);
-      setIsLoaading(false);
+      // setIsLoaading(false);
+      await dispatch(thunkWeather(values.nameCity))
       resetForm()
     },
   });
 
   const deleteOutputWeather = () => {
-    setCityWeather({
-      weather: [{ id: 0, main: '', icon: '' }],
-      main: { temp: 0 },
-      name: ''
-    });
-    // setCityWeather(null)
+    dispatch(resetWeather())
     setOutputisible(false);
   }
   
-  useEffect(() => {}, [cityWeather]);
-
-  console.log(iconImg);
-
   return (
     <div className={styles.container}>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
@@ -106,23 +71,21 @@ export default function WeatherApi() {
       
       {isOutputVisible && (
         <div className={styles.outputInfo}>
-          <p>{cityWeather?.main.temp}</p>
-          <h3>{cityWeather?.name}</h3>
+          <p>{dataWeather.main.temp}</p>
+          <h3>{dataWeather.name}</h3>
 
-          {cityWeather?.weather.map((el) => (
+          {dataWeather?.weather.map((el) => (
             <div key={el.id}>
-              <img src={iconImg} alt="iconImage" />
-              <img src={iconImg} alt="iconImage" />
               <img src={iconImg} alt="iconImage" />
             </div>
           ))}
           <div className={styles.containerSaveDelete}>
-            <button 
+            {/* <button 
               type="submit"
               onClick={saveCityWeather}
               className={styles.btnSaveDelete}
             >Save
-            </button>
+            </button> */}
             <button 
                 type='button' 
                 onClick={deleteOutputWeather}
