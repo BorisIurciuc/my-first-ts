@@ -6,6 +6,7 @@ interface IWeatherSlice {
   dataWeather: IWeatherData;
   isLoading: boolean;
   error: string;
+  savedCities: IWeatherData[];
 }
 
 const initialWeather: IWeatherData = {
@@ -18,6 +19,7 @@ const initialState: IWeatherSlice = {
   dataWeather: initialWeather,
   isLoading: false,
   error: "",
+  savedCities: []
 };
 
 export const weatherSlice = createSlice({
@@ -26,6 +28,9 @@ export const weatherSlice = createSlice({
   reducers: {
     resetWeather: (state) => {
       state.dataWeather = { ...initialWeather };
+    },
+    saveCityWeather: (state) => {
+      state.savedCities.push(state.dataWeather)
     }
   },
   extraReducers: (builder) => {
@@ -46,4 +51,4 @@ export const weatherSlice = createSlice({
 });
 
 export default weatherSlice;
-export const { resetWeather } = weatherSlice.actions;
+export const { resetWeather, saveCityWeather } = weatherSlice.actions;

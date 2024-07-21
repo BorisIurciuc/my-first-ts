@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { thunkWeather } from "../../features/weather/weatherAction";
-import { resetWeather } from "../../features/weather/weatherSlice";
+import { resetWeather, saveCityWeather } from "../../features/weather/weatherSlice";
 
 interface IInputCity {
   nameCity: string;
@@ -54,6 +54,10 @@ export default function WeatherApi() {
     setOutputVisible(false);
   };
 
+  const handleSaveCityWeather = () => {
+    dispatch(saveCityWeather())
+  }
+
   return (
     <div className={styles.container}>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
@@ -85,6 +89,14 @@ export default function WeatherApi() {
               <img src={iconImg} alt="iconImage" />
             </div>
           ))}
+            <button 
+              type="submit"
+              onClick={handleSaveCityWeather}
+              className={styles.btnSaveDelete}
+            >Save
+            </button>
+
+
           <div className={styles.containerSaveDelete}>
             <button
               type="button"

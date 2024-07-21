@@ -1,11 +1,13 @@
-import { useContext } from 'react'
-import { WeatherContext } from '../weatherContext/WeatherContext'
 import styles from './weatherCities.module.css'
+import { useAppSelector } from '../../app/hooks';
 
 
 export default function WeatherCities() {
 
-    const { savedCities } = useContext(WeatherContext)
+    const savedCities = useAppSelector(
+        (store) => store.sliceWeather.savedCities
+      );
+    
 
   return (
     <div className={styles.container}>
