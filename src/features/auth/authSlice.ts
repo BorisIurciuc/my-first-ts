@@ -8,7 +8,6 @@ const initialUser: IUserData = {
     username: '',
     refreshToken: '',
     token: '',
-
 }
 
 interface IUserState {
@@ -26,7 +25,11 @@ const initialState: IUserState = {
 export const authSlice = createSlice({
     name: 'authSlice',
     initialState,
-    reducers: {},
+    reducers: { 
+        logoutUser: (state) => {
+            state.user = initialUser
+        }
+    },
     extraReducers: (builder) => {
         builder
         .addCase(loginUser.pending, (state) => {
@@ -45,4 +48,4 @@ export const authSlice = createSlice({
 });
 
 export default authSlice;
-// export const { } = authSlice.actions
+export const { logoutUser } = authSlice.actions
