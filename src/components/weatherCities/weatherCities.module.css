@@ -46,3 +46,23 @@
     left: 200px;
   }
   
+  .containerSaveDelete {
+    position: relative;
+    top: 150px; 
+    left: -100px;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .btnSaveDelete {
+    width: 155px;
+    height: 48px;
+    padding: 12px 40px;
+    gap: 10px;
+    border-radius: 50px;
+    border: 1px solid transparent;
+    background-color: #3460db89;
+    color: #fff;
+    font-size: 17px;
+    cursor: pointer;
+  }

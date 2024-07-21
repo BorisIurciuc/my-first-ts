@@ -13,7 +13,9 @@ export default function WeatherCities() {
     return (
         <div className={styles.container}>
         {savedCities.map((el) => (
-            <div className={styles.outputInfo} key={el.weather[0].id}>
+            <div 
+                className={styles.outputInfo} 
+                key={el.weather[0].id}>
                 <h3>{el.name}</h3>
                 <p>{el.main.temp}</p>
                 <div className={styles.containerSaveDelete}>
