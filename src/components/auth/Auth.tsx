@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import styles from './auth.module.css'
 import * as Yup from 'yup';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch } from '../../app/hooks';
 import { loginUser } from '../../features/auth/authAction';
 
 export interface IFormValues {
@@ -23,7 +23,6 @@ const schema = Yup.object().shape({
 
 export default function Auth() {
     const dispatch = useAppDispatch()
-    const { user } = useAppSelector(store => store.authSlice)
 
     const formik = useFormik({
         initialValues: {
@@ -64,11 +63,6 @@ export default function Auth() {
             </div>
             <button type="submit">Submit</button>
         </form>
-        <div>
-            <h2>User Data</h2>
-            <p>ID: {user.id}</p>
-            <p>Username: {user.username}</p>
-        </div>
         </div>
     );
 }
