@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUserData } from '../../components/auth/Auth';
-import { loginUser } from './authAction';
+import { getUserWithToken, loginUser } from './authAction';
 
 
 const initialUser: IUserData = {
@@ -44,6 +44,14 @@ export const authSlice = createSlice({
             state.user = initialUser
             state.error = action.payload as string
         })
+        .addCase(getUserWithToken.pending, (state) => {
+            state.isLoading = true;
+        })
+        .addCase(getUserWithToken.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.user = action.payload;
+        })
+
     },
 });
 
