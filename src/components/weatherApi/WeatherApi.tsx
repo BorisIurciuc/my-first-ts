@@ -49,7 +49,7 @@ export default function WeatherApi() {
 
   console.log('dataWeather.weather[0].icon', dataWeather.weather[0].icon);
 
-  const deleteOutputWeather = () => {
+  const handledeleteOutputWeather = () => {
     dispatch(resetWeather());
     setOutputVisible(false);
   };
@@ -89,18 +89,16 @@ export default function WeatherApi() {
               <img src={iconImg} alt="iconImage" />
             </div>
           ))}
+          <div className={styles.containerSaveDelete}>
             <button 
               type="submit"
               onClick={handleSaveCityWeather}
               className={styles.btnSaveDelete}
             >Save
             </button>
-
-
-          <div className={styles.containerSaveDelete}>
             <button
               type="button"
-              onClick={deleteOutputWeather}
+              onClick={handledeleteOutputWeather}
               className={styles.btnSaveDelete}
             >
               Delete
