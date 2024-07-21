@@ -10,6 +10,10 @@
     align-items: center;
 }
 
+p {
+  color: yellow;
+}
+
 .link {
     margin: 0 1rem;
     text-decoration: none;
