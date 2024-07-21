@@ -9,6 +9,7 @@ export default function Header() {
   const dispatch = useAppDispatch()
 
   const handleLogout = () => {
+    localStorage.removeItem('storage-token')
     dispatch(logoutUser())
   }
 
