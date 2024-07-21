@@ -15,17 +15,17 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-  <HashRouter>
-    <Routes>
-      <Route path='/' element={<Layout />}>
-        <Route path='/' element={<Home />} />
-        <Route path='/weatherApi' element={<ProtectedRoute component={<WeatherApi/>} />} />
-        <Route path='/weatherCities' element={<ProtectedRoute component={<WeatherCities />} />} />
-        <Route path='/auth' element={<Auth/>}/>
-        <Route path="*" element={<h1>Error 404</h1>} />
-      </Route>
-    </Routes>
-  </HashRouter>
-    </Provider>
+    <HashRouter>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route path='/' element={<Home />} />
+          <Route path='/weatherApi' element={<ProtectedRoute component={<WeatherApi/>} />} />
+          <Route path='/weatherCities' element={<ProtectedRoute component={<WeatherCities />} />} />
+          <Route path='/auth' element={<Auth/>}/>
+          <Route path="*" element={<h1>Error 404</h1>} />
+        </Route>
+      </Routes>
+    </HashRouter>
+  </Provider>
 
 );

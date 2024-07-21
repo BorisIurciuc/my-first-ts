@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { logoutUser } from '../../features/auth/authSlice'
 
 export default function Header() {
-
   const { user } = useAppSelector(store => store.authSlice)
   const dispatch = useAppDispatch()
 
