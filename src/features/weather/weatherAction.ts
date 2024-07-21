@@ -13,14 +13,4 @@ export const thunkWeather = createAsyncThunk(
   }
 );
 
-export const thunkIcon = createAsyncThunk(
-  'weather/fetchIcon',
-  async (iconName: string, thunkAPI) => { 
-    try {
-      const response = await axios.get(`https://openweathermap.org/img/wn/${iconName}.png`);
-      return response.data;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+

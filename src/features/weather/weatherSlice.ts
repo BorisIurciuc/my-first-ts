@@ -1,12 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { thunkIcon, thunkWeather } from './weatherAction';
+import { createSlice } from '@reduxjs/toolkit';
+import { thunkWeather } from './weatherAction';
 import { IWeatherData } from '../../components/weatherApi/types/weaterData';
 
 interface IWeatherSlice {
   dataWeather: IWeatherData;
   isLoading: boolean;
   error: string;
-  thunkIcon: string;
 }
 
 const initialWeather: IWeatherData = {
@@ -19,7 +18,6 @@ const initialState: IWeatherSlice = {
   dataWeather: initialWeather,
   isLoading: false,
   error: "",
-  thunkIcon: ''
 };
 
 export const weatherSlice = createSlice({
@@ -44,10 +42,6 @@ export const weatherSlice = createSlice({
         state.dataWeather = { ...initialWeather };
         state.error = action.payload as string;
       })
-      .addCase(thunkIcon.fulfilled, (state, action: PayloadAction<string>) => {
-        state.isLoading = false;
-        state.thunkIcon = action.payload;
-      });
   },
 });
 

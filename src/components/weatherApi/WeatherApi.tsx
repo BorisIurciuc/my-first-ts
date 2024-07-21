@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./weather.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { thunkWeather, thunkIcon } from "../../features/weather/weatherAction";
+import { thunkWeather } from "../../features/weather/weatherAction";
 import { resetWeather } from "../../features/weather/weatherSlice";
-import { log } from "console";
 
 interface IInputCity {
   nameCity: string;
@@ -19,11 +18,13 @@ const schema = Yup.object().shape({
 });
 
 export default function WeatherApi() {
-  const { dataWeather, thunkIcon: iconUrl, isLoading } = useAppSelector(
+  const { dataWeather, isLoading } = useAppSelector(
     (store) => store.sliceWeather
   );
   const dispatch = useAppDispatch();
   const [isOutputVisible, setOutputVisible] = useState<boolean>(false);
+
+  const [iconImg, setIconImg] = useState<string>("");
 
   const formik = useFormik({
     initialValues: {
@@ -38,14 +39,15 @@ export default function WeatherApi() {
     },
   });
 
+  const iconName = dataWeather.weather[0].icon;
+
   useEffect(() => {
     if (dataWeather.weather[0].icon) {
-      dispatch(thunkIcon(dataWeather.weather[0].icon));
+      setIconImg(`https://openweathermap.org/img/wn/${iconName}.png`);
     }
-  }, [dataWeather, dispatch]);
+  }, [dataWeather.weather, iconName]);
 
   console.log('dataWeather.weather[0].icon', dataWeather.weather[0].icon);
-  console.log(thunkIcon);
 
   const deleteOutputWeather = () => {
     dispatch(resetWeather());
@@ -78,7 +80,9 @@ export default function WeatherApi() {
 
           {dataWeather?.weather.map((el) => (
             <div key={el.id}>
-              <img src={iconUrl} alt="iconImage" />
+              <img src={iconImg} alt="iconImage" />
+              <img src={iconImg} alt="iconImage" />
+              <img src={iconImg} alt="iconImage" />
             </div>
           ))}
           <div className={styles.containerSaveDelete}>
