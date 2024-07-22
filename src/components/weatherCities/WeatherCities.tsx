@@ -18,6 +18,11 @@ export default function WeatherCities() {
                 key={el.weather[0].id}>
                 <h3>{el.name}</h3>
                 <p>{el.main.temp}</p>
+                {el.weather.map((el) => (
+                        <div key={el.id}>
+                            <img src={`https://openweathermap.org/img/wn/${el.icon}.png`} alt="iconImage" />
+                        </div>
+                    ))}
                 <div className={styles.containerSaveDelete}>
                     <button
                         type="button"
